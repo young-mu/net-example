@@ -11,11 +11,12 @@ server.on('connection', function (sock) {
     sock.on('data', function (data) {
         console.log('> recv: ' + data);
         sock.write('I\'m Server!');
-//        sock.end(); // server close actively
+//        sock.destroy(); // server close actively (1)
+        sock.end(); // server close actively (2), will trigger own end event
     });
 
     sock.on('end', function () {
-        console.log('> ended by client');
+        console.log('> end is fired');
     });
 
     sock.on('close', function (data) {

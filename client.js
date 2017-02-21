@@ -12,7 +12,8 @@ client.on('connect', function () {
 
 client.on('data', function (buffer) {
     console.log('> recv: ' + buffer.toString());
-    client.destroy(); // client close actively
+//    client.destroy(); // client close actively (1)
+//   client.end(); // client close actively (2), will trigger own end event
 });
 
 client.on('close', function () {
@@ -20,7 +21,7 @@ client.on('close', function () {
 });
 
 client.on('end', function () {
-    console.log('> ended by server');
+    console.log('> end is fired');
 });
 
 client.on('error', function (error) {
